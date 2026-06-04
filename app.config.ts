@@ -31,7 +31,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         redirects: [
           { source: '/test', destination: '/explore' },
         ],
-        headOrigin: process.env.GAME === 'aoe2' ? 'https://www.aoe2companion.com/' : 'https://www.aoe4companion.com/',
       }),
       [
         "expo-splash-screen",
