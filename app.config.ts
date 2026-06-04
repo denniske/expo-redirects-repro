@@ -1,5 +1,7 @@
-{
-  "expo": {
+import { ConfigContext, ExpoConfig } from 'expo/config';
+import expoRouter from 'expo-router/plugin';
+
+export default ({ config }: ConfigContext): ExpoConfig => ({
     "name": "exporedirects",
     "slug": "exporedirects",
     "version": "1.0.0",
@@ -20,11 +22,17 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "output": "static",
+      "output": "server",
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      expoRouter({
+        unstable_useServerRendering: true,
+        redirects: [
+          { source: '/test', destination: '/explore' },
+        ],
+        headOrigin: process.env.GAME === 'aoe2' ? 'https://www.aoe2companion.com/' : 'https://www.aoe4companion.com/',
+      }),
       [
         "expo-splash-screen",
         {
@@ -40,5 +48,4 @@
       "typedRoutes": true,
       "reactCompiler": true
     }
-  }
-}
+});
